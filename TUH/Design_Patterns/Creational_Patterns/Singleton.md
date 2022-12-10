@@ -53,7 +53,7 @@ public class Settings {
 1. 자바의 동기화 블럭 처리 방법은?
    - Synchronized 키워드를 사용
 2. getInstance() 메소드 동기화시 사용하는 락(lock)은 인스턴스의 락인가 클래스의 락인가? 그 이유는?
-   - 
+   - 클래스 락. Java에서 스태틱 메소드 동기화는 클래스당 한 쓰레드에 접근할 수 있게 하기 때문
 
 ### 이른 초기화 (eager initialization)을 사용하는 방법
 
@@ -72,6 +72,7 @@ public class Settings {
 1. 이른 초기화가 단점이 될 수도 있는 이유?
    - 인스턴스를 만들어는 놨는데 쓰진 않는다면 리소스를 낭비하는 것이 될 수 있음
 2. 만약에 생성자에서 checked 예외를 던진다면 이 코드를 어떻게 변경해야 할까요?
+   - 
 
 ### double checked locking으로 효율적인 동기화 블럭 만들기
 
@@ -119,7 +120,7 @@ public static Settings getInstance() {
 ```
 
 1. 이 방법은 static final를 썼는데도 왜 지연 초기화(Lazy initialization)라고 볼 수 있는가?
-   - 
+   - static inner class는 로드는 되지만 호출하기 전에 초기화하지 않음. 호출 시에 초기화 된다.
 
 ## 싱글톤 패턴 구현 깨트리는 방법
 
