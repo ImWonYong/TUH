@@ -122,6 +122,20 @@ public static Settings getInstance() {
 1. 이 방법은 static final를 썼는데도 왜 지연 초기화(Lazy initialization)라고 볼 수 있는가?
    - static inner class는 로드는 되지만 호출하기 전에 초기화하지 않음. 호출 시에 초기화 된다.
 
+```java
+// 리플렉션과 직렬화 & 역직렬화에 안전한 코드
+// enum은 리플렉션을 막아둠
+public enum Settings {
+  	INSTANCE;
+}
+```
+
+1. enum 타입의 인스턴스를 리팩토링을 만들 수 있는가?
+2. enum으로 싱글톤 타입을 구현할 때의 단점은?
+   - 로딩 시 인스턴스가 만들어지고 상속을 쓸 수 없음
+3. 직렬화 & 역직렬화 시에 별도로 구현해야 하는 메소드가 있는가?
+   - 없음. enum은 이미 Serializable을 상속하고 있음
+
 ## 싱글톤 패턴 구현 깨트리는 방법
 
 ### 리플렉션을 사용한다면?
@@ -152,4 +166,3 @@ try (ObjectInput in = new ObjectInputStream(new FileInputStream("settings.obj"))
 
 System.out.println(settings == settings1);
 ```
-
