@@ -72,7 +72,7 @@ public class Settings {
 1. 이른 초기화가 단점이 될 수도 있는 이유?
    - 인스턴스를 만들어는 놨는데 쓰진 않는다면 리소스를 낭비하는 것이 될 수 있음
 2. 만약에 생성자에서 checked 예외를 던진다면 이 코드를 어떻게 변경해야 할까요?
-   - 
+   - [생성자 예외처리](https://velog.io/@imwy/Java-%EC%83%9D%EC%84%B1%EC%9E%90%EC%97%90%EC%84%9C-checked-%EC%98%88%EC%99%B8%EA%B0%80-%EB%B0%9C%EC%83%9D%ED%95%9C%EB%8B%A4%EB%A9%B4)
 
 ### double checked locking으로 효율적인 동기화 블럭 만들기
 
@@ -166,3 +166,10 @@ try (ObjectInput in = new ObjectInputStream(new FileInputStream("settings.obj"))
 
 System.out.println(settings == settings1);
 ```
+
+## 실무에서는 어떻게 쓰이나?
+
+- 스프링에서 빈의 스코프 중에 하나로 싱글톤 스코프
+- 자바 java.lang.Runtime
+  - 자바 어플리케이션의 실행의 환경, 문맥 정보에 대한 class
+- 다른 디자인 패턴(빌더, 퍼사드, 추상 팩토리 등) 구현체의 일부로 쓰이기도 함
