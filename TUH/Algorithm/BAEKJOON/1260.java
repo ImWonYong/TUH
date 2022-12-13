@@ -46,13 +46,13 @@ class Main {
     check[start] = true;
 
     while(!q.isEmpty()) {
-      start = p.poll();
+      start = q.poll();
       sb.append(start + " ");
 
       for (int i = 1; i <= node; i++) {
         if (arr[start][i] == 1 && !check[i]) {
           q.add(i);
-          check[i] true;
+          check[i] = true;
         }
       }
     }
