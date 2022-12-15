@@ -98,7 +98,7 @@ public class Main {
 
     static int[][] direction = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
 
-    static int bfs(int x, int y ) {
+    static int bfs(int x, int y) {
         Queue<Node> queue = new LinkedList<>();
         queue.offer(new Node(x, y));
 
@@ -115,12 +115,12 @@ public class Main {
                     continue;
                 }
 
-                if (arr[nx][ny] == 0) {
+                if (arr[ny][nx] == 0) {
                     continue;
                 }
 
-                if (arr[nx][ny] == 1) {
-                    arr[nx][ny] = arr[x][y] + 1;
+                if (arr[ny][nx] == 1) {
+                    arr[ny][nx] = arr[y][x] + 1;
                     queue.offer(new Node(nx, ny));
                 }
             }
