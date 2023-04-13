@@ -16,21 +16,21 @@ class Solution {
             slow = slow.next;
             fast = fast.next.next;         
         }
-        int ans = 0;
         
-        ListNode nextNode, prev = null;
+        ListNode prev = null;
+        
         while (slow != null) {
-            nextNode = slow.next;
+            ListNode nextNode = slow.next;
             slow.next = prev;
             prev = slow;
             slow = nextNode;
         }
         
-        ListNode start = head;
+        int ans = 0;
         while (prev != null) {
-            ans = Math.max(ans, start.val + prev.val);
+            ans = Math.max(ans, prev.val + head.val);
             prev = prev.next;
-            start = start.next;
+            head = head.next;
         }
         
         return ans;
