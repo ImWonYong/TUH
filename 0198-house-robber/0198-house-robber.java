@@ -1,24 +1,23 @@
 class Solution {
-    int[] memo = new int[100];
-
+    Map<Integer, Integer> memo = new HashMap<>();
     public int rob(int[] nums) {
-        Arrays.fill(memo, -1);
-
-        return robFrom(0, nums);
+        
+        return dp(nums.length - 1, nums);
     }
 
-    public int robFrom(int i, int[] nums) {
-        if (i >= nums.length) {
+
+    public int dp(int i, int[] nums) {
+        if (i < 0) {
             return 0;
         }
-
-        if (memo[i] > -1) {
-            return memo[i];
+        
+        
+        if (memo.containsKey(i)) {
+            return memo.get(i);
         }
-
-        int ans = Math.max(robFrom(i + 1, nums), robFrom(i + 2, nums) + nums[i]);
-
-        memo[i] = ans;
-        return ans;
+        
+        memo.put(i, Math.max(dp(i - 1, nums), dp(i - 2, nums) + nums[i]));
+        
+        return memo.get(i);
     }
 }
