@@ -8,31 +8,21 @@ class Solution {
     
     Map<Integer, Integer> memo = new HashMap<>();
     public int lengthOfLIS(int[] nums) {
-        int ans = 0;
+        int[] dp = new int[nums.length];
+        // base case
+        Arrays.fill(dp, 1);
         
+        int ans = 1;
         for (int i = 0; i < nums.length; i++) {
-            ans = Math.max(ans, dp(i, nums));
+            for (int j = 0; j < i; j++) {
+                if (nums[i] > nums[j]) {
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                    ans = Math.max(ans, dp[i]);
+                }
+            }
         }
         
         return ans;
     }
     
-    // dp의 return은 i까지의 최장 증가 부분수열, i는 입력 배열의 인데스
-    public int dp(int i, int[] nums) {
-        if (memo.containsKey(i)) {
-            return memo.get(i);
-        }
-        
-        int ans = 1;
-        
-        for (int j = 0; j < i; j++) {
-            if (nums[i] > nums[j]) {
-                ans = Math.max(ans, dp(j, nums) + 1);
-            }
-        }
-        
-        memo.put(i, ans);
-        
-        return ans;
-    }
 }
