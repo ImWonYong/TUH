@@ -1,14 +1,23 @@
 class Solution {
+    long[] dp;
 	public long mostPoints(int[][] questions) {
 		int n = questions.length;
-		long[] dp = new long[n + 1];
-
-		for (int i = n - 1; i >= 0; i--) {
-			int j = i + questions[i][1] + 1;
-
-			dp[i] = Math.max(questions[i][0] + dp[Math.min(j, n)], dp[i + 1]);
-		}
-
-		return dp[0];
+        dp = new long[n];
+        
+        return dfs(questions, 0);
 	}
+    
+    public long dfs(int[][] questions, int i) {
+        if (i >= questions.length) {
+            return 0;
+        }
+        
+        if (dp[i] != 0) {
+            return dp[i];
+        }
+        
+        dp[i] = Math.max(questions[i][0] + dfs(questions, i + questions[i][1] + 1), dfs(questions, i + 1));
+        
+        return dp[i];
+    }
 }
