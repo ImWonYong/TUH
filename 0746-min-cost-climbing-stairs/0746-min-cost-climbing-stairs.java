@@ -1,24 +1,25 @@
 class Solution {
-    // 무엇인가의 최대 최소, 이전의 결정에 다음 결정이 의존되어 있다 -> DP
-	public int minCostClimbingStairs(int[] cost) {
-		int minimumCost[] = new int[cost.length + 1];
-        
-        for (int i = 2; i < minimumCost.length; i++) {
-            int oneStep = minimumCost[i - 1] + cost[i - 1];
-            int twoStep = minimumCost[i - 2] + cost[i - 2];
-            minimumCost[i] = Math.min(oneStep, twoStep);
-        }
-        
-        return minimumCost[minimumCost.length - 1];
-	}
-    
-}
+    private HashMap<Integer, Integer> memo = new HashMap<Integer, Integer>();
 
-/*
-    3가지를 찾아야 합니다.
-    1. 재귀 함수의 리턴과 입력값
-    2. 재귀식
-    3. base case
-    
-    dfs(2) = cost[i] + min(dfs(1) , dfs(0));
-*/
+    public int minCostClimbingStairs(int[] cost) {
+        return minimumCost(cost.length, cost);
+    }
+
+    private int minimumCost(int i, int[] cost) {
+        // Base case, we are allowed to start at either step 0 or step 1
+        if (i <= 1) {
+            return 0;
+        }
+
+        // Check if we have already calculated minimumCost(i)
+        if (memo.containsKey(i)) {
+            return memo.get(i);
+        }
+
+        // If not, cache the result in our hash map and return it
+        int downOne = cost[i - 1] + minimumCost(i - 1, cost);
+        int downTwo = cost[i - 2] + minimumCost(i - 2, cost);
+        memo.put(i, Math.min(downOne, downTwo));
+        return memo.get(i);
+    }
+}
